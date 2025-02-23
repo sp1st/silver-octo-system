@@ -10,8 +10,8 @@ export default function Room({params} : {params:{roomId : string}}){
             <h1>キッチン</h1>
             {cleaningNames.map(
                 (cleaningName, index) => (
-                    <Link href={`/room/${params.roomId}/${2}`}>
-                        <div className="p-2 bg-black text-white" key={index}>{cleaningName}</div>
+                    <Link href={`/room/${params.roomId}/${2}`} key={index}>
+                        <div className="p-2 bg-black text-white">{cleaningName}</div>
                     </Link>
                 )
             )}
