@@ -1,11 +1,12 @@
 import { auth, signIn, signOut } from "@/auth";
+import Link from "next/link";
 
 export default async function Header() {
   const session = await auth();
   return (
     <header className="h-[70px] border-b">
       <div className="container mx-auto h-full flex items-center justify-between">
-        <h1 className="text-[1.5rem] font-bold">大掃除</h1>
+        <Link href="/"><h1 className="text-[1.5rem] font-bold">大掃除</h1></Link>
         {!session && <form
           action={async () => {
             "use server"

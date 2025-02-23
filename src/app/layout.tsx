@@ -14,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet"></link>
+      </head>
+      <body className="font-dot">
         <Header />
         <main>{children}</main>
       </body>
