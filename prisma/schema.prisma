@@ -41,6 +41,7 @@ model Room {
 model Cleaning {
   cleaningId   Int     @id @default(autoincrement())
   cleaningName String
+  cleaningDetail String
   Description  String?
   hint         String?
   imageUrl     String?
