@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header";
+import { DotGothic16 } from "next/font/google";
+
+const font = DotGothic16({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <head>
-        <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet"></link>
-      </head>
-      <body className="font-dot">
+      <body className={font.className}>
         <Header />
         <main>{children}</main>
       </body>
