@@ -31,7 +31,7 @@ model User {
 }
 
 model Room {
-  roomId   Int     @id @default(autoincrement())
+  roomId   String     @id
   roomName String
   imageUrl String?
 
@@ -50,7 +50,7 @@ model Cleaning {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  roomId         Int
+  roomId         String
   room           Room            @relation(fields: [roomId], references: [roomId])
   user_cleanings User_cleaning[]
 }
