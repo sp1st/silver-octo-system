@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const POST = async (req: NextRequest) => {
   try {
-    const { userId, cleaningId} = await req.json();
+    const { userId, cleaningId } = await req.json();
     const userCleaning = await prisma.user_cleaning.create({
       data: {
         userId: userId,
