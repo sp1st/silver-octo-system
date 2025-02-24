@@ -6,7 +6,7 @@ import { FC, useEffect, useState } from "react";
 import Hint from "@/components/hint";
 import Image from "next/image";
 
-export default function CleaningDetail({params} : { params : Promise<{cleaningId : number, roomId:string}> }){
+export default function CleaningDetail({params} : { params : { cleaningId: number, roomId: string} }){
 
     interface CleaningData {
         roomId: string;
@@ -25,9 +25,9 @@ export default function CleaningDetail({params} : { params : Promise<{cleaningId
     useEffect(
         ()=>{
             async function getCleaningData(){
-                const id = (await params).cleaningId;
+                const { cleaningId, roomId } = await params;
                 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-                const _cleaningDatas_ = await fetch(`${baseUrl}/api/v1/room/kitchen/${id}`);
+                const _cleaningDatas_ = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}`);
                 const cleaningDatas = await _cleaningDatas_.json();
                 setCleaningData(cleaningDatas[0]);
             }
