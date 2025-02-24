@@ -6,7 +6,7 @@ import { FC, useEffect, useState } from "react";
 import Hint from "@/components/hint";
 import Image from "next/image";
 
-export default function CleaningDetail({params} : { params : { cleaningId: number, roomId: string} }){
+export default function CleaningDetail({params} : { params : Promise<{ cleaningId: number, roomId: string}> }){
 
     interface CleaningData {
         roomId: string;

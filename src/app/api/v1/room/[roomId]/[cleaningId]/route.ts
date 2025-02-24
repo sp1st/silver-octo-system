@@ -2,9 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 const GET = async (
-  req: NextRequest, { params }: { params: {cleaningId: string} }
+  req: NextRequest, { params }: { params: Promise<{cleaningId: string}> }
 ) => {
-    const {cleaningId} = await params
+    const { cleaningId } = await params;
 
     const cleaning = await prisma.cleaning.findMany({
       where: {cleaningId: Number(cleaningId)}

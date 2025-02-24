@@ -6,7 +6,7 @@ type CleaningData = {
     cleaningName: string;
 }
 
-export default async function Room({params} : {params:{roomId : string}}){
+export default async function Room({params} : {params: Promise<{roomId : string}>}){
     const { roomId } = await params;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const cleanings = await fetch(`${baseUrl}/api/v1/room/${roomId}`);
