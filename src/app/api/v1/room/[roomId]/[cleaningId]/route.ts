@@ -5,7 +5,7 @@ const GET = async (
   req: NextRequest,
   context: { params: { roomId: string; cleaningId: string } }
 ) => {
-  const { roomId, cleaningId } = context.params;
+  const { roomId, cleaningId } = await context.params;
 
   const cleaning = await prisma.cleaning.findMany({
     where: { roomId, cleaningId: Number(cleaningId) },

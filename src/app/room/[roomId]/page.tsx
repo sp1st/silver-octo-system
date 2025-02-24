@@ -8,7 +8,8 @@ type CleaningData = {
 
 export default async function Room({params} : {params:{roomId : string}}){
     const { roomId } = await params;
-    const cleanings = await fetch(`http://localhost:3000/api/v1/room/${roomId}`);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const cleanings = await fetch(`${baseUrl}/api/v1/room/${roomId}`);
     const cleaningsData = await cleanings.json();
 
     return (

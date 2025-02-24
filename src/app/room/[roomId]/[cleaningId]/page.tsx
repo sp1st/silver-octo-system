@@ -26,7 +26,8 @@ export default function CleaningDetail({params} : { params : Promise<{cleaningId
         ()=>{
             async function getCleaningData(){
                 const id = (await params).cleaningId;
-                const _cleaningDatas_ = await fetch(`http://localhost:3000/api/v1/room/kitchen/${id}`);
+                const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+                const _cleaningDatas_ = await fetch(`${baseUrl}/api/v1/room/kitchen/${id}`);
                 const cleaningDatas = await _cleaningDatas_.json();
                 setCleaningData(cleaningDatas[0]);
             }
@@ -61,7 +62,7 @@ export default function CleaningDetail({params} : { params : Promise<{cleaningId
             <div className="m-2 text-center my-4">
                 <div className="text-[24px]">討伐中...</div>
                 <div className="flex justify-center my-4">
-                    <Image src="/battle.gif" alt="戦っているGIF" width={400} height={300} />
+                    <Image src="/battle.gif" alt="戦っているGIF" width={400} height={300} unoptimized />
                 </div>
             </div>
             : ""}
@@ -80,12 +81,6 @@ export default function CleaningDetail({params} : { params : Promise<{cleaningId
                             <Command label="討伐完了"/>
                         </Link>
                 </div> : ""}
-
-                {/* {isFighting ? 
-                <Link href={`/room/${cleaningData.roomId}/${cleaningData.cleaningId}`}>
-                    <Command label="討伐完了"/>
-                </Link>
-                : ""} */}
 
                 {isShowHint ? "" :
                  <div onClick={()=>setIsShowHint(true)}>

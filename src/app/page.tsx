@@ -8,7 +8,8 @@ interface Room {
 }
 
 export default async function Home() {
-  const rooms = await fetch("http://localhost:3000/api/v1/room")
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const rooms = await fetch(`${baseUrl}/api/v1/room`);
   const roomsData = await rooms.json();
   const session = await auth();
 
