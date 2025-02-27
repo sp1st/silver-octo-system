@@ -5,9 +5,9 @@ export default async function Header() {
   const session = await auth();
   return (
     <header className="bg-black text-white h-[70px] border-b">
-      <div className="container mx-auto h-full flex items-center justify-between px-6">
-        {/* <Link href="/"><h1 className="text-[1.5rem] font-bold">Room Pikapika Game</h1></Link> */}
-        <Link href="/"><div className="bg-gray-100 text-black h-[60px] flex items-center p-2"><div>サイトロゴ画像</div></div></Link>
+      <div className="container mx-auto h-full flex items-center justify-between px-1">
+        <Link href="/"><h1 className="text-[1.5rem] font-bold">
+          <span className="text-blue-500">R</span>oom <span className="text-blue-500">P</span>ikapika <span className="text-blue-500">G</span>ame</h1></Link> 
         {!session && <form
           action={async () => {
             "use server"
