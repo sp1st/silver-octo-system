@@ -22,8 +22,7 @@ export default async function Home() {
   for (const room of roomsData){
     const roomStatus = await getRoomStatus(room.roomId, userId);
     // washroomの画像ができたら、以下の行に戻してください。
-    //if (roomStatus !== "No Cleanings"){
-    if (roomStatus !== "No Cleanings" && room.roomId!="washroom"){
+    if (roomStatus !== "No Cleanings"){
       roomsDataAndStatus.push({...room, roomStatus: roomStatus})
     }
   }

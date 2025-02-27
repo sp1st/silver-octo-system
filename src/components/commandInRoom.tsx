@@ -11,11 +11,11 @@ const CommandInRoom: FC<CommandProps> = (props) => {
     const [selected, setSelected] = useState<boolean>();
 
     return (
-        <div className="py-1 px-4 cursor-pointer flex" onMouseEnter={() => setSelected(true)} onMouseLeave={()=>setSelected(false)}>
+        <div className="py-1 px-4 cursor-pointer flex items-center" onMouseEnter={() => setSelected(true)} onMouseLeave={()=>setSelected(false)}>
             <span className={selected === true ? "visible" : "invisible"}>▶ </span>
             {props.label}
             {props.done 
-            ? <div className="bg-gray-100 p-1 w-[40px] h-[40px] text-black text-[10px]">完了<br/>バッジ</div> 
+            ? <div><img src="/CLEAR.png" alt="CLEAR" className="w-[70px] mx-3"/></div> 
             : ""}
 
         </div>
