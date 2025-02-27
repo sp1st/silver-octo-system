@@ -6,6 +6,8 @@ type CleaningData = {
     roomId: string;
     cleaningId: string;
     cleaningName: string;
+    do: boolean;
+    done: boolean
 }
 
 export default async function Room({params} : {params: Promise<{roomId : string}>}){
@@ -50,7 +52,7 @@ export default async function Room({params} : {params: Promise<{roomId : string}
             <h1 className="flex flex-col items-start my-4">掃除内容を選ぶ</h1>
             <div className="bg-black text-white p-4 border-double border-8 border-white rounded-md">
                 {dataList.map(
-                    (cleaningData :CleaningData) => (
+                    (cleaningData: CleaningData) => (
                         <Link href={`/room/${cleaningData.roomId}/${cleaningData.cleaningId}`} key={cleaningData.cleaningId}>
                             <div className="p-2 bg-black text-white flex items-center">
                                 <div>{cleaningData.cleaningName} </div>
