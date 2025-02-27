@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function DoneQuest(){
     const randomMurabitoWords = ["あの伝説の戦闘の日から、この地では、勇者のウワサで、もちきりなのです。",
@@ -6,7 +9,13 @@ export default function DoneQuest(){
         "勇者の力で、この地に、正義と清潔が取り戻されたのでございます。"
     ]
 
-    const randomMurabitoWord = randomMurabitoWords[Math.floor(Math.random() * randomMurabitoWords.length)]
+    const [ randomMurabitoWord, setRandomMurabitoWord ] = useState("");
+
+    useEffect(
+        ()=>{
+            setRandomMurabitoWord(randomMurabitoWords[Math.floor(Math.random() * randomMurabitoWords.length)]);
+        }, []
+    )
 
     return(
         <div className="text-center text-[20px]">
