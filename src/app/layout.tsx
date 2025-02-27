@@ -24,8 +24,8 @@ export default async function RootLayout({
       <body className={font.className}>
         <Header />
         <main>
-          {!session && <Home />}
-          {session && children}
+            {!session && <Home />}
+            {session && children}
         </main>
       </body>
     </html>
