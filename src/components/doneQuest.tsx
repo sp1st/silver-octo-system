@@ -18,18 +18,20 @@ export default function DoneQuest(){
     )
 
     return(
-        <div className="text-center text-[20px]">
+        <div className="text-center text-[20px] my-10">
             討伐済みのクエストです
-            <div className="flex">
+            <div className="flex my-4">
                 <div className="m-1">
-                    <div className="bg-gray-100 text-black w-[100px] h-[100px] text-[10px]">村人の顔のイラスト</div>
+                    <div className=" text-black w-[100px] h-[100px] text-[10px]">
+                        <img src="/noka.png" className="m-1 w-[70px] h-[70px] sm:w-[100px] sm:h-[100px]" alt="村人"/>
+                    </div>
                     村人
                 </div>
-                <div className="text-[15px] p-2 m-2">
+                <div className="test-y-center text-[15px] p-2 m-2">
                     {randomMurabitoWord}
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center m-5">
                 <Link href={"./"}>
                     <img src="/area-button.png" alt="エリア画面にもどる" className="w-[200px]"/>
                 </Link>

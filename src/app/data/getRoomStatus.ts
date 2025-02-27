@@ -7,8 +7,8 @@ export default async function getRoomStatus(roomId: string, userId: string){
         return "No Cleanings"
     }
 
-    var doCount = 0;
-    var doneCount = 0;
+    let doCount = 0;
+    let doneCount = 0;
 
     for (const d of data){
         const res = await fetch(`${baseUrl}/api/v1/room/${roomId}/${d.cleaningId}/${userId}`);

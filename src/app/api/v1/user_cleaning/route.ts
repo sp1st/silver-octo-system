@@ -4,8 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 const POST = async (req: NextRequest) => {
   try {
     const { userId, cleaningId } = await req.json();
-    const userCleaning = await prisma.user_cleaning.create({
-      data: {
+    const userCleaning = await prisma.user_cleaning.upsert({
+      where:{
+        userId_cleaningId: {
+          userId: userId,
+          cleaningId: cleaningId,
+        }
+      },
+      update: {},
+      create: {
         userId: userId,
         cleaningId: cleaningId,
         do: true,

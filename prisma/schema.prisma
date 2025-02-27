@@ -64,6 +64,8 @@ model User_cleaning {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([userId, cleaningId])
+
   cleaningId Int
   cleaning   Cleaning @relation(fields: [cleaningId], references: [cleaningId])
   userId     String

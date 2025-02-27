@@ -17,7 +17,7 @@ export default async function Room({params} : {params: Promise<{roomId : string}
     const cleanings = await fetch(`${baseUrl}/api/v1/room/${roomId}`);
     const cleaningsData = await cleanings.json();
 
-    var dataList = [];
+    const dataList = [];
 
     const session = await auth();
 

@@ -24,6 +24,7 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
     const [isShowHint, setIsShowHint] = useState(false);
     const [cleaningData, setCleaningData] = useState<CleaningData | null>(null);
     const [fightingStatus, setFightingStatus] = useState("未着手");
+    const [userId, setUserId] = useState<string | null>(null);
 
     const {data : session} = useSession();
     const userEmail = session?.user?.email;
@@ -43,6 +44,7 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
                 const userIdObj = await fetch(`${baseUrl}/api/v1/user/${userEmail}`);
                 const userIdData = await userIdObj.json();
                 const userId = userIdData.id;
+                setUserId(userId);
 
                 const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}/${userId}`);
                 const userCleaningData = await userCleaning.json();
@@ -73,7 +75,7 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
                 await fetch(`${baseUrl}/api/v1/user_cleaning/done`, {
                     method : "PUT",
                     body : JSON.stringify({
-                            userId: "cm7hslm6r0000oi7shjg4gf52",
+                            userId: userId,
                             cleaningId: cleaningData?.cleaningId,
                             done: true }),
                     headers : {"Content-Type":"application/json"}
