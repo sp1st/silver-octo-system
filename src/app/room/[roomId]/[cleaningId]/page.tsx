@@ -1,6 +1,6 @@
 "use client"
 
-import Loading from "@/components/loading";
+import Loading from "@/app/loading";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import Hint from "@/components/hint";
