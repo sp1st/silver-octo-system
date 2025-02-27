@@ -1,6 +1,8 @@
 import Link from "next/link";
 import getRoomStatus from "./data/getRoomStatus";
 import { auth } from "@/auth";
+import Loading from "./loading";
+import HoverableImage from "@/components/hoverableImage";
 
 interface Room {
   roomId: string;
@@ -20,7 +22,9 @@ export default async function Home() {
 
   for (const room of roomsData){
     const roomStatus = await getRoomStatus(room.roomId, userId);
-    if (roomStatus !== "No Cleanings"){
+    // washroomの画像ができたら、以下の行に戻してください。
+    //if (roomStatus !== "No Cleanings"){
+    if (roomStatus !== "No Cleanings" && room.roomId!="washroom"){
       roomsDataAndStatus.push({...room, roomStatus: roomStatus})
     }
   }
@@ -31,9 +35,10 @@ export default async function Home() {
           roomsDataAndStatus.map(
             (room: Room) => (
               <Link href={`/room/${room.roomId}`} key={room.roomId} className="m-1">
-                  { room.roomStatus === "Not Completed" 
-                    ? <div className="bg-[url(/kitchen_dirty.png)] hover:bg-[url(/kitchen_dirty_yusha.png)] bg-cover w-[150px] h-[150px]"></div>
-                    : <div className="bg-[url(/kitchen_clean.png)] hover:bg-[url(/kitchen_clean_yusha.png)] bg-cover w-[150px] h-[150px]"></div>}
+                  { room.roomStatus === "Completed"
+                    ? <HoverableImage roomName = {room.roomName} nothovered={`/${room.roomId}_clean.png`} hovered={`/${room.roomId}_clean_yusha.png`}/>
+                    : <HoverableImage roomName = {room.roomName} nothovered={`/${room.roomId}_dirty.png`} hovered={`/${room.roomId}_dirty_yusha.png`}/>
+                  }
                   <div className="left-[70px] top-[100px]">{room.roomName}</div>
                </Link>
             )

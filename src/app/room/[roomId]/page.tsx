@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Command from "@/components/command";
 import MapModoruLink from "@/components/mapModoru";
 import Link from "next/link";
 
@@ -55,10 +56,7 @@ export default async function Room({params} : {params: Promise<{roomId : string}
                     (cleaningData: CleaningData) => (
                         <Link href={`/room/${cleaningData.roomId}/${cleaningData.cleaningId}`} key={cleaningData.cleaningId}>
                             <div className="p-2 bg-black text-white flex items-center">
-                                <div>{cleaningData.cleaningName} </div>
-                                {cleaningData.done 
-                                ? <div className="bg-gray-100 p-1 w-[50px] h-[50px] text-black text-[10px]">完了<br/>バッジ</div> 
-                                : ""}
+                                <Command label={cleaningData.cleaningName} done={cleaningData.done}/>
                             </div>
                         </Link>
                     )

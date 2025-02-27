@@ -2,12 +2,13 @@
 
 import Loading from "@/app/loading";
 import Link from "next/link";
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Hint from "@/components/hint";
 import Image from "next/image";
 import DoneQuest from "@/components/doneQuest";
 import Result from "@/components/result";
 import { useSession } from "next-auth/react";
+import Command from "@/components/command";
 
 export default function CleaningDetail({params} : { params : Promise<{ cleaningId: number, roomId: string}> }){
 
@@ -20,7 +21,6 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
         hint: string;
     }
 
-    const [selected, setSelected] = useState("たたかう");
     const [isShowHint, setIsShowHint] = useState(false);
     const [cleaningData, setCleaningData] = useState<CleaningData | null>(null);
     const [fightingStatus, setFightingStatus] = useState("未着手");
@@ -55,21 +55,6 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
             getCleaningData();
         }, [userEmail]
     )
-
-    interface CommandProps {
-        label: string;
-    }
-    
-    const Command: FC<CommandProps> = (props) => {
-        const label = props.label;
-    
-        return (
-            <div className="py-1 px-4 cursor-pointer" onMouseEnter={() => setSelected(label)}>
-                <span className={selected === label ? "visible" : "invisible"}>▶</span>
-                {props.label}
-            </div>
-        );
-    };
 
     function CommandsArea(){
         return (
