@@ -8,12 +8,11 @@ const GET = async (req: NextRequest, { params }: { params: Promise<{userId:strin
       where: {
           userId: userId,
           cleaningId: Number(cleaningId),
+      },
+      select: {
+        do: true,
+        done: true,
       }
-      //,
-      //select: {
-      //  do: true,
-      //  done: true,
-      //}
     });
     return NextResponse.json(userCleaning, { status: 200 });
   } catch (e) {

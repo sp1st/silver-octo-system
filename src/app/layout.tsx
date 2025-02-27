@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import { DotGothic16 } from "next/font/google";
 import { auth } from "@/auth";
 import Home from "@/components/home";
+import { SessionProvider } from "next-auth/react";
 
 const font = DotGothic16({ weight: "400", subsets: ["latin"] });
 
@@ -22,11 +23,13 @@ export default async function RootLayout({
   return (
     <html lang="ja">
       <body className={font.className}>
-        <Header />
-        <main>
-            {!session && <Home />}
-            {session && children}
-        </main>
+        <SessionProvider>
+          <Header />
+          <main>
+              {!session && <Home />}
+              {session && children}
+          </main>
+        </SessionProvider>
       </body>
     </html>
   );

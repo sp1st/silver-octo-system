@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import MapModoruLink from "@/components/mapModoru";
 import Link from "next/link";
 
@@ -15,10 +16,11 @@ export default async function Room({params} : {params: Promise<{roomId : string}
 
     var dataList = [];
 
-    for (const c of cleaningsData){
-        const userIdTemp = "cm7hslm6r0000oi7shjg4gf52";
+    const session = await auth();
 
-        const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${c.cleaningId}/${userIdTemp}`);
+    for (const c of cleaningsData){
+
+        const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${c.cleaningId}/${session?.user?.id}`);
         const userCleaningData = await userCleaning.json();
 
         if (userCleaningData.length === 0){

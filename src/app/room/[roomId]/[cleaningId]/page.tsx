@@ -7,6 +7,7 @@ import Hint from "@/components/hint";
 import Image from "next/image";
 import DoneQuest from "@/components/doneQuest";
 import Result from "@/components/result";
+import { useSession } from "next-auth/react";
 
 export default function CleaningDetail({params} : { params : Promise<{ cleaningId: number, roomId: string}> }){
 
@@ -24,15 +25,26 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
     const [cleaningData, setCleaningData] = useState<CleaningData | null>(null);
     const [fightingStatus, setFightingStatus] = useState("未着手");
 
+    const {data : session} = useSession();
+    const userEmail = session?.user?.email;
+
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
     useEffect(
         ()=>{
             async function getCleaningData(){
+
+                if (!userEmail) return;
+
                 const { cleaningId, roomId } = await params;
-                const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
                 const _cleaningDatas_ = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}`);
                 const cleaningDatas = await _cleaningDatas_.json();
 
-                const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}/cm7hslm6r0000oi7shjg4gf52`);
+                const userIdObj = await fetch(`${baseUrl}/api/v1/user/${userEmail}`);
+                const userIdData = await userIdObj.json();
+                const userId = userIdData.id;
+
+                const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}/${userId}`);
                 const userCleaningData = await userCleaning.json();
                 if (userCleaningData[0].done){
                     setFightingStatus("討伐済み")
@@ -41,7 +53,7 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
                 setCleaningData(cleaningDatas[0]);
             }
             getCleaningData();
-        }, []
+        }, [userEmail]
     )
 
     interface CommandProps {
@@ -73,7 +85,7 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
 
             {fightingStatus === "討伐中" ? 
             <div onClick = {async ()=>{
-                await fetch("http://localhost:3000/api/v1/user_cleaning/done", {
+                await fetch(`${baseUrl}/api/v1/user_cleaning/done`, {
                     method : "PUT",
                     body : JSON.stringify({
                             userId: "cm7hslm6r0000oi7shjg4gf52",
