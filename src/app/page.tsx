@@ -1,7 +1,6 @@
 import Link from "next/link";
 import getRoomStatus from "./data/getRoomStatus";
 import { auth } from "@/auth";
-import Loading from "./loading";
 import HoverableImage from "@/components/hoverableImage";
 
 interface Room {
