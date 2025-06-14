@@ -29,7 +29,7 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
     const {data : session} = useSession();
     const userEmail = session?.user?.email;
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    // const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     useEffect(
         ()=>{
@@ -38,15 +38,18 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
                 if (!userEmail) return;
 
                 const { cleaningId, roomId } = await params;
-                const _cleaningDatas_ = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}`);
+                // const _cleaningDatas_ = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}`);
+                const _cleaningDatas_ = await fetch(`/api/v1/room/${roomId}/${cleaningId}`);
                 const cleaningDatas = await _cleaningDatas_.json();
 
-                const userIdObj = await fetch(`${baseUrl}/api/v1/user/${userEmail}`);
+                // const userIdObj = await fetch(`${baseUrl}/api/v1/user/${userEmail}`);
+                const userIdObj = await fetch(`/api/v1/user/${userEmail}`);
                 const userIdData = await userIdObj.json();
                 const userId = userIdData.id;
                 setUserId(userId);
 
-                const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}/${userId}`);
+                // const userCleaning = await fetch(`${baseUrl}/api/v1/room/${roomId}/${cleaningId}/${userId}`);
+                const userCleaning = await fetch(`/api/v1/room/${roomId}/${cleaningId}/${userId}`);
                 const userCleaningData = await userCleaning.json();
                 if (userCleaningData[0].done){
                     setFightingStatus("討伐済み")
@@ -72,7 +75,8 @@ export default function CleaningDetail({params} : { params : Promise<{ cleaningI
 
             {fightingStatus === "討伐中" ? 
             <div onClick = {async ()=>{
-                await fetch(`${baseUrl}/api/v1/user_cleaning/done`, {
+                // await fetch(`${baseUrl}/api/v1/user_cleaning/done`, {
+                await fetch(`/api/v1/user_cleaning/done`, {
                     method : "PUT",
                     body : JSON.stringify({
                             userId: userId,
