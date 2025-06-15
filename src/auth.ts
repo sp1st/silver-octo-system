@@ -30,6 +30,33 @@ export const authConfig: NextAuthConfig = {
       }
       return session;
     },
+  },
+  events: {
+    async createUser(message) {
+      // message.user には作成されたユーザーの情報が含まれる
+      // message.user.id を使って初期化処理を行う
+      if (message.user.id) {
+        const userId = message.user.id;
+        const allCleanings = await prisma.cleaning.findMany({
+          select: { cleaningId: true } // cleaningId のみ取得
+        });
+
+        if (allCleanings.length > 0) {
+          const userCleaningDataToCreate = allCleanings.map(cleaning => ({
+            userId: userId,
+            cleaningId: cleaning.cleaningId,
+            do: false, // 初期状態
+            done: false // 初期状態
+          }));
+
+          await prisma.user_cleaning.createMany({
+            data: userCleaningDataToCreate,
+            skipDuplicates: true, // 念のため (複合ユニークキーがある前提)
+          });
+          console.log(`Initialized user_cleaning records for new user: ${userId}`);
+        }
+      }
+    }
   }
 }
 // })

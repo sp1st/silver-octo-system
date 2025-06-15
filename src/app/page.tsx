@@ -30,18 +30,18 @@ export default async function Home() {
   //         });
   //     }
   // }
-  if (userId) {
-    const allCleanings = await prisma.cleaning.findMany();
-    await Promise.all(
-      allCleanings.map(c =>
-        prisma.user_cleaning.upsert({
-          where: { userId_cleaningId: { userId, cleaningId: c.cleaningId } },
-          update: {},
-          create: { userId, cleaningId: c.cleaningId, do: false, done: false },
-        })
-      )
-    );
-  }
+  // if (userId) {
+  //   const allCleanings = await prisma.cleaning.findMany();
+  //   await Promise.all(
+  //     allCleanings.map(c =>
+  //       prisma.user_cleaning.upsert({
+  //         where: { userId_cleaningId: { userId, cleaningId: c.cleaningId } },
+  //         update: {},
+  //         create: { userId, cleaningId: c.cleaningId, do: false, done: false },
+  //       })
+  //     )
+  //   );
+  // }
 
   // const rooms = await fetch(`${baseUrl}/api/v1/room`);
   // const roomsData = await rooms.json();
