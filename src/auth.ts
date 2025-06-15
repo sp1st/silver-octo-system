@@ -45,7 +45,7 @@ export const authConfig: NextAuthConfig = {
           const userCleaningDataToCreate = allCleanings.map(cleaning => ({
             userId: userId,
             cleaningId: cleaning.cleaningId,
-            do: false, // 初期状態
+            do: true, // 初期状態
             done: false // 初期状態
           }));
 
